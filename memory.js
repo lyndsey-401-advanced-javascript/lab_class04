@@ -12,7 +12,7 @@ class Model {
     let response = id ? this.database.filter((record) => record.id === id) : this.database;
     return Promise.resolve(response);
   }
-
+ 
   create(entry) {
     entry.id = uuid();
     let record = this.sanitize(entry);
@@ -32,7 +32,7 @@ class Model {
   }
 
 	// Vinicio - this would be our 'isValid', but it changes the data if it finds anything wrong
-  sanitize(entry) {
+  sanitize(entry) {3
 
     let valid = true;
     let record = {};
