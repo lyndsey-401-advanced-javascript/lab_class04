@@ -15,13 +15,13 @@ class Model {
  
   create(entry) {
     entry.id = uuid();
-    let record = this.sanitize(entry);
+    let record = this.validator(entry);
     if (record.id) { this.database.push(record); }
     return Promise.resolve(record);
   }
 
   update(id, entry) {
-    let record = this.sanitize(entry);
+    let record = this.validator(entry);
     if (record.id) { this.database = this.database.map((item) => (item.id === id) ? record : item); }
     return Promise.resolve(record);
   }
@@ -31,19 +31,16 @@ class Model {
     return Promise.resolve();
   }
 
-	// Vinicio - this would be our 'isValid', but it changes the data if it finds anything wrong
-  sanitize(entry) {3
+	
+  validator(entry) {3
 
     let valid = true;
     let record = {};
-		// Vinicio - this code is checking that properties are present in objects
-		// Vinicio - your goal is to change that to check for types as well
-		// Please take inspiration from lab 02
 
     Object.keys(this.schema).forEach(field => {
       if (this.schema[field].required) {
         if (entry[field]) {
-          record[field] = entry[field];
+          record[field] = entry[field] && (this.type === type);
         } else {
           valid = false;
         }

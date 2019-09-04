@@ -1,16 +1,17 @@
-const Categories = require('../categories/categories.js');
+const Categories = require('../models/categories.js');
+const Products = require('../models/products.js');
 
-describe('Categories Model', () => {
+describe('Model', () => {
 
-  let categories;
+  let models;
 
   beforeEach(() => {
-    categories = new Categories();
+    models = new DataModel();
   })
 
   // How might we repeat this to check on types?
   it('sanitize() returns undefined with missing requirements', () => {
-    const schema = categories.schema;
+    const schema = this.schema;
     var testRecord = {};
     for (var field in schema) {
       if (schema[field].required) {
